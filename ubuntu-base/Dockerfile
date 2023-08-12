@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo"
-RUN useradd -u 1000 -m -g root -G sudo ubuntu
+RUN useradd -u 1000 -m -G root,sudo ubuntu
 
 # Copy authorized_keys file and set correct permissions
 COPY authorized_keys /home/ubuntu/.ssh/authorized_keys
