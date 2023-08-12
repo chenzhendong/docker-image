@@ -8,7 +8,7 @@ RUN apt-get -y update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo"
+# Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo", and make ubuntu user passwordless
 RUN useradd -u 1000 -m -G root,sudo ubuntu && \
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
 
@@ -28,7 +28,7 @@ USER ubuntu
 EXPOSE 22
 
 # Start SSH server as a daemon
-CMD ["/user/bin/sudo", "/usr/sbin/sshd", "-D"]
+CMD ["/usr/bin/sudo", "/usr/sbin/sshd", "-D"]
 
 
 
