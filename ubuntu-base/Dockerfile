@@ -26,7 +26,7 @@ RUN apt-get update && \
 EXPOSE 22
 
 # Start SSH server as a daemon
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["sudo", "/usr/sbin/sshd", "-D"]
 
 
 
