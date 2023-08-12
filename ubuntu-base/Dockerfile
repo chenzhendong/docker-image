@@ -9,7 +9,7 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo", and make ubuntu user passwordless
-RUN useradd -u 1000 -m -G root,sudo ubuntu && \
+RUN useradd -u 1000 -s /usr/bin/bash -m -G root,sudo ubuntu && \
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu && \
     mkdir /run/sshd
 
