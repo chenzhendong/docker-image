@@ -3,13 +3,14 @@ FROM ubuntu:latest
 
 # Install necessary tools
 RUN apt-get -y update && \
-    apt-get install -y sudo netcat iputils-ping curl wget git tar gzip zip && \
+    apt-get install -y sudo netcat iputils-ping curl vim wget git tar gzip zip && \
     apt-get install -y mysql-client postgresql-client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo"
 RUN useradd -u 1000 -m -G root,sudo ubuntu
+echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
 
 # Copy authorized_keys file and set correct permissions
 COPY authorized_keys /home/ubuntu/.ssh/authorized_keys
@@ -23,10 +24,11 @@ RUN apt-get update && \
     sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 # Expose SSH port
+USER ubuntu
 EXPOSE 22
 
 # Start SSH server as a daemon
-CMD ["sudo", "/usr/sbin/sshd", "-D"]
+CMD ["/user/bin/sudo", "/usr/sbin/sshd", "-D"]
 
 
 
