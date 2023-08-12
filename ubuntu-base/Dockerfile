@@ -11,7 +11,8 @@ RUN apt-get -y update && \
 # Create a user "ubuntu" with uid 1000, add to groups "root" and "sudo", and make ubuntu user passwordless
 RUN useradd -u 1000 -s /usr/bin/bash -m -G root,sudo ubuntu && \
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu && \
-    mkdir /run/sshd
+    mkdir /run/sshd && \
+    mkdir /data &&  chmod 777 /data
 
 # Copy authorized_keys file and set correct permissions
 COPY authorized_keys /home/ubuntu/.ssh/authorized_keys
