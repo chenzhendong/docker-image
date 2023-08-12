@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Install necessary tools
 RUN apt-get -y update && \
-    apt-get install -y netcat iputils-ping curl wget git tar gzip zip && \
+    apt-get install -y sudo netcat iputils-ping curl wget git tar gzip zip && \
     apt-get install -y mysql-client postgresql-client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
